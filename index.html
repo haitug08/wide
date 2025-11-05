@@ -312,74 +312,83 @@
   }
   
   initializePlanDisplay(); // ページロード時に呼び出す
+  
+function getAmount(type, headcount, plan, term) {
+   let amount = 0;
 
-  function getAmount(type, headcount, plan, term) {
-    let amount = 0;
+   if (type === 'personal' && headcount === 'personal') {
+     if (plan === 'standard') {
+       if (term === 'month') {
+         amount = 10400;
+       } else if (term === 'year') {
+         amount = 124800;
+       }
+     } else if (plan === 'wide') {
+       if (term === 'month') {
+         amount = 18400;
+       } else if (term === 'year') {
+         amount = 220800;
+       }
+     } 
+     // ▼ 追加
+     else if (plan === 'light') { 
+       if (term === 'month') {
+         amount = 4600; // 個人のライト（月払）
+       } else if (term === 'year') {
+         amount = 55200; // 個人のライト（年払）
+       }
+     }
+     // ▲ 追加
+   }
 
-    if (type === 'personal' && headcount === 'personal') {
-      if (plan === 'standard') {
-        if (term === 'month') {
-          amount = 10400;
-        } else if (term === 'year') {
-          amount = 124800;
-        }
-      } else if (plan === 'wide') {
-        if (term === 'month') {
-          amount = 18400;
-        } else if (term === 'year') {
-          amount = 220800;
-        }
-      }
-    }
+   if (type === 'corporation') {
+     if (headcount === '100to300') {
+       if (plan === 'standard') {
+         if (term === 'month') {
+           amount = 52700;
+         } else {
+           amount = 632400;
+         }
+       }
+       if (plan === 'light') {
+         if (term === 'month') {
+           amount = 25700;
+         } else {
+           amount = 308400;
+         }
+       }
+     }
 
-    if (type === 'corporation') {
-      if (headcount === '100to300') {
-        if (plan === 'standard') {
-          if (term === 'month') {
-            amount = 52700;
-          } else {
-            amount = 632400;
-          }
-        }
-        if (plan === 'light') {
-          if (term === 'month') {
-            amount = 25700;
-          } else {
-            amount = 308400;
-          }
-        }
-      }
+     if (headcount === '10to100') {
+       if (plan === 'standard') {
+         if (term === 'month') {
+           amount = 43400;
+         } else {
+           amount = 520800;
+         }
+       }
+       if (plan === 'light') {
+         if (term === 'month') {
+           amount = 21000;
+         } else {
+           amount = 252000;
+         }
+       }
+     }
 
-      if (headcount === '10to100') {
-        if (plan === 'standard') {
-          if (term === 'month') {
-            amount = 43400;
-          } else {
-            amount = 520800;
-          }
-        }
-        if (plan === 'light') {
-          if (term === 'month') {
-            amount = 21000;
-          } else {
-            amount = 252000;
-          }
-        }
-      }
+     if (headcount === 'under10') {
+       if (plan === 'standard') {
+         if (term === 'month') {
+           amount = 18400;
+         } else {
+           amount = 220800;
+         }
+       }
+     }
+   }
 
-      if (headcount === 'under10') {
-        if (plan === 'standard') {
-          if (term === 'month') {
-            amount = 18400;
-          } else {
-            amount = 220800;
-          }
-        }
-      }
-    }
-
-    return '¥' + amount.toLocaleString();
-  }
+   return '¥' + amount.toLocaleString();
+ }
 </script>
     <footer>
     <ul class='fnav0'>
